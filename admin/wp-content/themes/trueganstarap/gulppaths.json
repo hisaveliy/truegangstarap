@@ -1,0 +1,22 @@
+{
+
+	"input": {
+		"styles": "assets/styles",
+		"scripts": "assets/scripts",
+		"sprites": "assets/sprites",
+		"images": "assets/images",
+		"fonts": "assets/fonts"
+	},
+
+	"output": {
+		"resources": "dist",
+		"build": "dist/build",
+		"styles": "dist/styles",
+		"scripts": "dist/scripts",
+		"sprites": "dist/images",
+		"images": "dist/images",
+		"cssimages": "../images",
+		"fonts": "dist/fonts"
+	}
+
+}
