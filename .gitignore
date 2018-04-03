@@ -1,5 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# wordpress
+/admin/wp-config.php
+/admin/wp-content/uploads
+/admin/wp-content/themes/trueganstarap/node_modules
+
 # compiled output
 /dist
 /dist-server
