@@ -17,6 +17,7 @@ class Setup{
      */
     public function __construct(){
         add_action( 'after_setup_theme', array( $this, 'theme_setup'  ) );
+        add_filter( 'image_size_names_choose', array( $this, 'custom_sizes') );
     }
 
 
@@ -68,6 +69,20 @@ class Setup{
         // Add excerpt to pages
         add_post_type_support( 'page', 'excerpt' );
 
+        add_image_size( '1450-size', 1450, 1450 );
+        add_image_size( '1150-size', 1150, 1150 );
+        add_image_size( '760-size', 700, 700 );
+        add_image_size( '550-size', 500, 500 );
+        add_image_size( '380-size', 350, 350 );
     }
 
+    public function custom_sizes( $sizes ) {
+        return array_merge( $sizes, array(
+            '1450-size' => 'Size 1400',
+            '1150-size' => 'Size 1150',
+            '760-size'  => 'Size 760',
+            '550-size'  => 'Size 550',
+            '380-size'  => 'Size 380',
+        ) );
+    }
 }
