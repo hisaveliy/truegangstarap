@@ -19,11 +19,11 @@ class PostTypes {
 	 * Constructor.
 	 */
 	public function __construct() {
-
-		// Team CPT
 		add_action( 'init', array( $this, 'releases_post_type' ) );
 		add_action( 'init', array( $this, 'genre_taxonomy' ) );
 		add_action( 'init', array( $this, 'origin_taxonomy' ) );
+		add_action( 'init', array( $this, 'author_taxonomy' ) );
+		add_action( 'init', array( $this, 'tag_taxonomy' ) );
 	}
 
 	public function releases_post_type() {
@@ -60,8 +60,7 @@ class PostTypes {
 			'label'               => __( 'Release', 'tgr' ),
 			'description'         => __( 'Release', 'tgr' ),
 			'labels'              => $labels,
-			'supports'            => array(),
-			'taxonomies'          => array(),
+			'taxonomies'          => array('tags', 'genre', 'origin', 'author', 'tag'),
 			'hierarchical'        => false,
 			'public'              => true,
 			'show_ui'             => true,
@@ -124,6 +123,54 @@ class PostTypes {
             'query_var' => true,
         );
         register_taxonomy('origin', 'release', $args);
+    }
+
+    public function author_taxonomy() {
+        $labels = array(
+            'name' => __( 'Authors'  ),
+            'singular_name' => __( 'Author'  ),
+            'search_items' =>  __( 'Search Authors' ),
+            'all_items' => __( 'All Authors' ),
+            'parent_item' => __( 'Parent Author' ),
+            'parent_item_colon' => __( 'Parent Author:' ),
+            'edit_item' => __( 'Edit Author' ),
+            'update_item' => __( 'Update Author' ),
+            'add_new_item' => __( 'Add New Author' ),
+            'new_item_name' => __( 'New Author Name' ),
+            'menu_name' => __( 'Authors' ),
+        );
+        $args = array(
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
+            'query_var' => true,
+        );
+        register_taxonomy('author', 'release', $args);
+    }
+
+    public function tag_taxonomy() {
+        $labels = array(
+            'name' => __( 'Tags'  ),
+            'singular_name' => __( 'Tag'  ),
+            'search_items' =>  __( 'Search Tags' ),
+            'all_items' => __( 'All Tags' ),
+            'parent_item' => __( 'Parent Tag' ),
+            'parent_item_colon' => __( 'Parent Tag:' ),
+            'edit_item' => __( 'Edit Tag' ),
+            'update_item' => __( 'Update Tag' ),
+            'add_new_item' => __( 'Add New Tag' ),
+            'new_item_name' => __( 'New Tag Name' ),
+            'menu_name' => __( 'Tags' ),
+        );
+        $args = array(
+            'hierarchical' => false,
+            'labels' => $labels,
+            'show_ui' => true,
+            'query_var' => true,
+            'update_count_callback' => '_update_post_term_count',
+            'rewrite' => array( 'slug' => 'tag' ),
+        );
+        register_taxonomy('tag', 'release', $args);
     }
 }
 

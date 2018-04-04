@@ -27,6 +27,10 @@ function app_autoloader($class) {
 // Register autoloader
 spl_autoload_register('app_autoloader');
 
+include_once('plugins/advanced-custom-fields/acf.php');
+
+// define( 'ACF_LITE', true );
+
 // Theme setup
 new \app\Setup();
 
